@@ -1,4 +1,4 @@
-import throttles from "../node_modules/throttles/dist/index.mjs";
+import throttles from "./throttles.mjs";
 
 const $button = document.querySelector("button");
 const $delay = document.querySelector("#delay");
