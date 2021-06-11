@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Delay test</title>
+        <style>
+            .container {
+                display: flex;
+                flex-wrap: wrap;
+                margin: 0;
+                justify-content: space-evenly;
+            }
+            article {
+                width: 150px;
+                margin: 10px 0;
+            }
+            @media (min-width: 340px) {
+                article {
+                    width: 168px; /* Img 336 */
+                }
+            }
+            @media (min-width: 400px) {
+                article {
+                    width: 187px; /* Img 374 */
+                }
+            }
+            header {
+                font-size: 20px;
+                padding: 1rem;
+                margin-top: 1rem;
+                background: yellow;
+                display: flex;
+                justify-content: space-between;
+            }
+            input,
+            button {
+                font: inherit;
+                margin-left: 0.33rem;
+            }
+            input {
+                width: 100px;
+                flex-grow: 1;
+                text-align: right;
+            }
+            img {
+                max-width: 100%;
+                display: block;
+            }
+            .legenda {
+                position: sticky;
+                top: 0;
+                padding: 1rem;
+                background: #fffe;
+            }
+            .legenda > p {
+                margin: 0;
+            }
+            .fetch-started {
+                outline: 3px solid blue;
+            }
+            .fetch-completed {
+                outline: 3px solid green;
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            <!-- Throttle: <input id="throttle" type="number" value="4" /> --> Delay:
+            <input id="delay" type="number" value="500" />
+            <button type="button">Start</button>
+        </header>
+        <div class="legenda">
+            <p>Blue = started prefetching</p>
+            <p>Green = prefetched</p>
+        </div>
+        <div class="container">
+            <article data-clone="100">
+                <a href="#smartphone-pdp-item.html"
+                    ><img
+                        src="https://via.placeholder.com/374"
+                        width="187"
+                        height="187"
+                        alt="ph"
+                /></a>
+            </article>
+        </div>
+        <script>
+            // Duplicating stuff
+            const element = document.querySelector("[data-clone]");
+            const container = document.querySelector(".container");
+            const times = element.dataset.clone;
+            for (let i = 0; i <= times; i++) {
+                container.appendChild(element.cloneNode(true));
+            }
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@17.4.0/dist/lazyload.iife.min.js"></script>
+        <script src="./js/page.js"></script>
+    </body>
+</html>
