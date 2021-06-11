@@ -67,13 +67,15 @@
     </head>
     <body>
         <header>
-            <!-- Throttle: <input id="throttle" type="number" value="4" /> --> Delay:
-            <input id="delay" type="number" value="500" />
+            <div>Throttle: <input id="throttle" type="number" value="4" /></div>
+            <div>Delay: <input id="delay" type="number" value="500" /></div>
             <button type="button">Start</button>
         </header>
         <div class="legenda">
             <p>Blue = started prefetching</p>
             <p>Green = prefetched</p>
+            <p>Currently prefetching = <output id="prefetching"></output></p>
+            <p>Prefetched = <output id="prefetched"></output></p>
         </div>
         <div class="container">
             <article data-clone="100">

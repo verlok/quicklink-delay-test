@@ -1,14 +1,47 @@
 {
-    let throttle, delay;
+    const queue = [];
+    const fakePrefetchTime = 1000; //TODO: make a config
+
+    let throttle,
+        delay,
+        countPrefetching = 0,
+        countPrefetched = 0;
+
+    const $button = document.querySelector("button");
+    const $delay = document.querySelector("#delay");
+    const $throttle = document.querySelector("#throttle");
+    const $prefetching = document.querySelector("#prefetching");
+    const $prefetched = document.querySelector("#prefetched");
+
     const fakePrefetch = (el) => {
+        countPrefetching += 1;
+        $prefetching.innerHTML = countPrefetching;
         el.classList.add("fetch-started");
         setTimeout(() => {
+            countPrefetching -= 1;
+            $prefetching.innerHTML = countPrefetching;
+            countPrefetched += 1;
+            $prefetched.innerHTML = countPrefetched;
             el.classList.add("fetch-completed");
-        }, 1000);
+            manageQueue();
+        }, fakePrefetchTime);
+    };
+
+    const manageQueue = () => {
+        for (let i = 0; i < queue.length; i += 1) {
+            if (countPrefetching >= throttle) return;
+            const el = queue.shift();
+            fakePrefetch(el);
+        }
+    };
+
+    const enqueuePrefetch = (el) => {
+        queue.push(el);
+        manageQueue();
     };
     const onenter = (el) => {
         const timer = setTimeout(() => {
-            fakePrefetch(el);
+            enqueuePrefetch(el);
         }, parseInt(delay));
         el.setAttribute("data-timer", timer);
     };
@@ -19,11 +52,11 @@
         el.removeAttribute("data-timer");
         el.classList.remove("fetch-started");
     };
-    const button = document.querySelector("button");
+
     const start = () => {
-        button.disabled = true;
-        delay = document.querySelector("#delay").value;
-        /*  throttle=document.querySelector("#throttle").value; */
+        $button.disabled = true;
+        delay = $delay.value;
+        throttle = $throttle.value;
         new LazyLoad({
             elements_selector: "article",
             callback_enter: onenter,
@@ -32,5 +65,5 @@
             threshold: 0
         });
     };
-    button.addEventListener("click", start);
+    $button.addEventListener("click", start);
 }
