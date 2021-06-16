@@ -1,6 +1,6 @@
-# Quicklink delay test
+# Quicklink optimal options
 
-This is to test the optimal options to configure Quicklink
+This is to try and find the optimal options to configure Quicklink
 
 [Open it](http://www.andreaverlicchi.eu/quicklink-delay-test/)
 
