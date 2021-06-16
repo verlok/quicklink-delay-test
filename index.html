@@ -6,7 +6,13 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Delay test</title>
         <style>
+            html, body {
+                max-width: 414px;
+                margin: 0 auto;
+            }
+
             .container {
+                max-width: 414px;
                 display: flex;
                 flex-wrap: wrap;
                 margin: 0;
@@ -79,12 +85,12 @@
             <p>Prefetched = <output id="prefetched">0</output></p>
         </div>
         <div class="container">
-            <article data-clone="100">
+            <article data-clone="99">
                 <a href="#smartphone-pdp-item.html"
                     ><img
-                        src="https://via.placeholder.com/374"
+                        src="https://via.placeholder.com/374x514"
                         width="187"
-                        height="187"
+                        height="257"
                         alt="ph"
                 /></a>
             </article>
