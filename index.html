@@ -6,7 +6,13 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Delay test</title>
         <style>
+            html, body {
+                max-width: 414px;
+                margin: 0 auto;
+            }
+
             .container {
+                max-width: 414px;
                 display: flex;
                 flex-wrap: wrap;
                 margin: 0;
@@ -40,7 +46,7 @@
                 margin-left: 0.33rem;
             }
             input {
-                width: 100px;
+                width: 70px;
                 flex-grow: 1;
                 text-align: right;
             }
@@ -69,21 +75,22 @@
         <header>
             <div>Throttle: <input id="throttle" type="number" value="6" /></div>
             <div>Delay: <input id="delay" type="number" value="500" /></div>
+            <div>Threshold: <input id="threshold" type="number" value="0.9" /></div>
             <button type="button">Start</button>
         </header>
         <div class="legenda">
             <p>Blue = started prefetching</p>
             <p>Green = prefetched</p>
-            <p>Currently prefetching = <output id="prefetching"></output></p>
-            <p>Prefetched = <output id="prefetched"></output></p>
+            <p>Currently prefetching = <output id="prefetching">0</output></p>
+            <p>Prefetched = <output id="prefetched">0</output></p>
         </div>
         <div class="container">
-            <article data-clone="100">
+            <article data-clone="99">
                 <a href="#smartphone-pdp-item.html"
                     ><img
-                        src="https://via.placeholder.com/374"
+                        src="https://via.placeholder.com/374x514"
                         width="187"
-                        height="187"
+                        height="257"
                         alt="ph"
                 /></a>
             </article>
@@ -97,7 +104,6 @@
                 container.appendChild(element.cloneNode(true));
             }
         </script>
-        <script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@17.4.0/dist/lazyload.iife.min.js"></script>
         <script type="module" src="./js/page.js"></script>
     </body>
 </html>

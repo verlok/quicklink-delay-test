@@ -1,14 +1,16 @@
+import LazyLoad from "./lazyload.mjs";
 import throttles from "./throttles.mjs";
 
 const $button = document.querySelector("button");
 const $delay = document.querySelector("#delay");
+const $threshold = document.querySelector("#threshold");
 const $throttle = document.querySelector("#throttle");
 const $prefetching = document.querySelector("#prefetching");
 const $prefetched = document.querySelector("#prefetched");
 
 const fakePrefetchTime = 1000; //TODO: make this a config
 
-let delay,
+let delay, threshold,
     countPrefetching = 0,
     countPrefetched = 0,
     toAdd,
@@ -33,7 +35,7 @@ const onenter = (el) => {
         toAdd(() => {
             fakePrefetch(el);
         });
-    }, parseInt(delay));
+    }, delay);
     el.setAttribute("data-timer", timer);
 };
 
@@ -47,14 +49,17 @@ const onexit = (el) => {
 
 const start = () => {
     $button.disabled = true;
-    delay = $delay.value;
+    delay = parseInt($delay.value);
+    threshold = parseFloat($threshold.value);
     [toAdd, isDone] = throttles($throttle.value || 1 / 0);
     new LazyLoad({
         elements_selector: "article",
         callback_enter: onenter,
         callback_exit: onexit,
         cancel_on_exit: false,
-        threshold: 0
+        threshold: 0,
+        io_threshold: threshold
     });
 };
+
 $button.addEventListener("click", start);
